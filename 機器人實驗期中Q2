@@ -1,0 +1,22 @@
+#include <stdio.h> /* 系統標準輸出⼊函⽰庫 */
+#include <system.h> /* 系統函⽰庫 */
+#include <io.h> /* 系統I/O函⽰庫*/
+#include <unistd.h> /* 宣告usleep函數 */
+int main()
+{
+ int led,bt;
+
+ led = 1;
+ while(1){
+ bt=IORD(BUTTON_BASE, 0); /* 讀取button edge暫存器 */
+ if((bt&0x04)==0){ /* 判斷button[2]按鈕 */
+ led = led << 2; /* LED 燈左移 */
+ if(led > 0x200){ /* 檢查邊界 */
+ led = 0x01;
+ }
+ }
+ IOWR(LED_BASE, 0, led); /* 輸出⾄LED顯⽰ */
+ usleep(50000);
+ }
+ return 0;
+}
