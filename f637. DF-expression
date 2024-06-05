@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+string s0;
+int p = -1;
+int decode(int n);
+
+int main(){
+    int n;
+    cin >> s0 >> n;
+    cout<<decode(n);
+}
+int decode(int n){
+    p++;
+    int black=0;
+    if(s0[p]=='0')black=0;
+    else if(s0[p]=='1')black=black +n*n;
+    else if(s0[p]=='2'){
+        for(int i =0;i<4;i++){
+            black=black+decode(n/2);
+            
+        }
+    }
+    return black;
+}
