@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+#define f(x) (2 * x - 3)
+#define g(x, y) (2 * x + y - 7)
+#define h(x, y, z) (3 * x - 2 * y + z)
+
+int main() {
+	cin.sync_with_stdio(false); cin.tie(nullptr);
+	int stack[1000], top = 0, last, x, y, z;
+	string parameters;
+	getline(cin, parameters);
+	last = parameters.size();
+	for (int i = parameters.size() - 1; i >= 0; --i)
+		if (parameters[i] == 'f') {
+			x = stack[top - 1];
+			stack[top - 1] = f(x);
+			last = i; --i;
+		}
+		else if (parameters[i] == 'g') {
+			x = stack[top - 1]; y = stack[top - 2];
+			--top; stack[top - 1] = g(x, y);
+			last = i; --i;
+		}
+		else if (parameters[i] == 'h') {
+			x = stack[top - 1]; y = stack[top - 2]; z = stack[top - 3];
+			top -= 2; stack[top - 1] = h(x, y, z);
+			last = i; --i;
+		}
+		else if (parameters[i] == ' ') {
+			stack[top] = stoi(parameters.substr(i + 1, last - i - 1)); ++top;
+			last = i;
+		}
+	cout << stack[0] << '\n';
+}
