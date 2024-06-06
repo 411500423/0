@@ -1,22 +1,37 @@
-//00100 - The 3n + 1 problem
+//3n+1
 #include <iostream>
+using namespace std;
 
-using  namespace std;
-int main() {
-    char c;
-    bool flag = true;
-    while (cin.get(c)){
-        if (c == '"')
-        {
-            if (flag)
-                cout <<"``";
-            else
-                cout <<"''";
-            flag = !flag ;
-        }
-        else
-            cout << c;
+int main(void){ 
+	int i, j, m, M;
+	int n;
+	int cycle, t;
+	
+	ios::sync_with_stdio(0);
+ 	cin.tie(0);
+
+ 	while(cin >> i >> j){
+ 		m = min(i, j);
+	 	M = max(i, j);
+ 
+ 		cycle = 0;
+ 		for(int k=m; k<=M; k++){
+
+ 		n = k;
+ 		t = 0;      
+		while(1){
+ 		t++;
+
+			if(n == 1) break;
+ 		
+			if(n%2) n = 3*n+1;
+ 			else n /= 2;    
+		}
+ 		cycle = max(cycle, t); 
+	}
+	
+	cout << i << " " << j << " " << cycle << '\n'; 
     }
-
+    
     return 0;
 }
