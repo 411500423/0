@@ -1,18 +1,23 @@
+//一堆石頭 
 #include <iostream>
+#include <map>
 using namespace std;
 
-int main (){
-	int n ; 
-	int arr[10] = {0};
-	while (cin >>n ){
-		arr[n]	++;
-	}
-
-	for (int i = 0; i<10; i++){
-		if (arr[i]%3){
-			cout << i;
-			break;
-		}
-	}
+int main(void){
+    map<int, int> st;
+ 	int n;
+   
+	ios::sync_with_stdio(0);
+ 	cin.tie(0);
 	
+ 	while(cin >> n) st[n]++;
+ 
+ 	for(auto p:st){
+ 		if(p.second%3){
+ 			cout << p.first;
+ 			break;
+ 		}
+ 	}
+ 
+ 	return 0;
 }
